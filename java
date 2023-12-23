@@ -83,13 +83,13 @@ public class StudentManagementSystem {
     public static void printReport(Student[] students, int numStudents) {
         // Print the attendance report in a table format.
         System.out.printf("| %-20s | %-12s | %-20s | %-10s | %-20s |\n", "Name", "Roll Number", "Course", "Attendance", "Attendance Date");
-        System.out.println("+----------------------+--------------+----------------------+------------+----------------------+\n");
+        System.out.println("+----------------------+--------------+----------------------+------------+----------------------+");
 
         for (int i = 0; i < numStudents; i++) {
             System.out.printf("| %-20s | %-12d | %-20s | %-10d | %-20s |\n",
                     students[i].name, students[i].rollNumber, students[i].course, students[i].attendance, students[i].attendanceDate);
         }
-        System.out.println("+----------------------+--------------+----------------------+------------+----------------------+\n");
+        System.out.println("+----------------------+--------------+----------------------+------------+----------------------+");
     }
 
     public static void main(String[] args) {
@@ -101,42 +101,43 @@ public class StudentManagementSystem {
         int numStudents = 0;
 
         // The main menu.
-        Scanner scanner = new Scanner(System.in);
-        int choice;
-        while (true) {
-            System.out.println("1. Add student");
-            System.out.println("2. Remove student");
-            System.out.println("3. Mark attendance");
-            System.out.println("4. Print report");
-            System.out.println("5. Exit");
-            System.out.print("Enter your choice: ");
-            choice = scanner.nextInt();
+        try (Scanner scanner = new Scanner(System.in)) {
+            int choice;
+            while (true) {
+                System.out.println("1. Add student");
+                System.out.println("2. Remove student");
+                System.out.println("3. Mark attendance");
+                System.out.println("4. Print report");
+                System.out.println("5. Exit");
+                System.out.print("Enter your choice: ");
+                choice = scanner.nextInt();
 
-            switch (choice) {
-                case 1:
-                    addStudent(students, numStudents);
-                    break;
-                case 2:
-                    System.out.print("Enter the student roll number to remove: ");
-                    int rollNumber = scanner.nextInt();
-                    removeStudent(students, numStudents, rollNumber);
-                    break;
-                case 3:
-                    System.out.print("Enter the student roll number to mark attendance: ");
-                    int rollNum = scanner.nextInt();
-                    System.out.print("Is the student present (1 for yes, 0 for no)? ");
-                    int isPresent = scanner.nextInt();
-                    markAttendance(students, numStudents, rollNum, isPresent);
-                    break;
-                case 4:
-                    printReport(students, numStudents);
-                    break;
-                case 5:
-                    // Exit the program.
-                    System.exit(0);
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
+                switch (choice) {
+                    case 1:
+                        addStudent(students, numStudents);
+                        break;
+                    case 2:
+                        System.out.print("Enter the student roll number to remove: ");
+                        int rollNumber = scanner.nextInt();
+                        removeStudent(students, numStudents, rollNumber);
+                        break;
+                    case 3:
+                        System.out.print("Enter the student roll number to mark attendance: ");
+                        int rollNum = scanner.nextInt();
+                        System.out.print("Is the student present (1 for yes, 0 for no)? ");
+                        int isPresent = scanner.nextInt();
+                        markAttendance(students, numStudents, rollNum, isPresent);
+                        break;
+                    case 4:
+                        printReport(students, numStudents);
+                        break;
+                    case 5:
+                        // Exit the program.
+                        System.exit(0);
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                        break;
+                }
             }
         }
     }
